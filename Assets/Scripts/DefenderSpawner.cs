@@ -5,8 +5,10 @@ public class DefenderSpawner : MonoBehaviour {
 
 	private Vector2 targetLocation;
 	private GameObject parent;
-	
+	private StarDisplay starDisplay;
+	private int defenderCost;
 	void Start () {
+		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
 		parent = GameObject.Find("Defenders");
 		if (!parent){
 			parent = new GameObject("Defenders");
@@ -14,15 +16,20 @@ public class DefenderSpawner : MonoBehaviour {
 	}
 	
 	void Update () {
-	
+
 	}
 
 	void OnMouseDown(){
 		targetLocation = CalculateWorldPointOfMouseClick(Input.mousePosition);
 		if (Button.selectedButton){
-			GameObject defender = Instantiate(Button.selectedButton, targetLocation, Quaternion.identity) as GameObject;
-			defender.transform.parent = parent.transform;
-			Button.selectedButton = null;
+			defenderCost = Button.selectedButton.GetComponent<Defender>().StarCost;
+			if (starDisplay.UseStars(defenderCost)){
+				GameObject defender = Instantiate(Button.selectedButton, targetLocation, Quaternion.identity) as GameObject;
+				defender.transform.parent = parent.transform;
+				Button.selectedButton = null;
+			} else {
+				print("Cannot afford defender");
+			}
 		}
 	}
 

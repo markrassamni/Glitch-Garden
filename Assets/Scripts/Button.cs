@@ -7,11 +7,11 @@ public class Button : MonoBehaviour {
 	[SerializeField] private GameObject thisButton;
 	private SpriteRenderer sprite;
 	private Color originalColor;
-
 	private Button[] buttons;
+	private StarDisplay starDisplay;
 
-	// Use this for initialization
 	void Start () {
+		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
 		buttons = GameObject.FindObjectsOfType<Button>();
 		sprite = GetComponent<SpriteRenderer>();
 		originalColor = sprite.color;
@@ -33,8 +33,11 @@ public class Button : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		FadeAll();
-		sprite.color = originalColor;
-		selectedButton = thisButton;
+		//TODO error, if select one then select another, both highlight
+		selectedButton = null;
+		if (thisButton.GetComponent<Defender>().StarCost <= starDisplay.StarCount){
+			selectedButton = thisButton;
+			sprite.color = originalColor;
+		} 
 	}
 }

@@ -12,6 +12,7 @@ public class Attacker : MonoBehaviour {
 	private Animator anim;
 
 	private GameObject currentTarget;
+	private LevelManager levelManager;
 
 	public float SpawnTime{
 		get {
@@ -22,6 +23,7 @@ public class Attacker : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
+		levelManager = GameObject.FindObjectOfType<LevelManager>();
 	}
 	
 	// Update is called once per frame
@@ -52,6 +54,13 @@ public class Attacker : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		//Debug.Log(name + " trigger enter");
+		if (other.tag == "LoseGame"){
+			try {
+				levelManager.LoadScene("03b Lose");
+			} catch {
+				Debug.LogError("Scene '03b' Lose does not exist or cannot be loaded.");
+			}
+			
+		}
 	}
 }
