@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{CF979E89-FEE3-50CE-C4DE-86CF42C5A293}") = "Glitch Garden", "Assembly-CSharp-firstpass.csproj", "{41AD7A0A-FDE4-CD2D-1CC3-77BD2CE106DD}"
+EndProject
+Project("{CF979E89-FEE3-50CE-C4DE-86CF42C5A293}") = "Glitch Garden", "Assembly-CSharp.csproj", "{57519B5A-0702-8D5E-8344-BE203C54CCC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41AD7A0A-FDE4-CD2D-1CC3-77BD2CE106DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41AD7A0A-FDE4-CD2D-1CC3-77BD2CE106DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41AD7A0A-FDE4-CD2D-1CC3-77BD2CE106DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41AD7A0A-FDE4-CD2D-1CC3-77BD2CE106DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57519B5A-0702-8D5E-8344-BE203C54CCC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57519B5A-0702-8D5E-8344-BE203C54CCC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57519B5A-0702-8D5E-8344-BE203C54CCC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57519B5A-0702-8D5E-8344-BE203C54CCC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
