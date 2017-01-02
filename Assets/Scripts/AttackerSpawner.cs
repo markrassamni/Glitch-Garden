@@ -4,18 +4,20 @@ using System.Collections;
 public class AttackerSpawner : MonoBehaviour {
 
 	private GameTimer gameTimer;
+	private Pause pause;
 	[SerializeField] private Attacker[] attackers;
 
 	void Start () {
 		gameTimer = FindObjectOfType<GameTimer>();
+		pause = FindObjectOfType<Pause>();
 	}
 	
 	void Update () {
-		if (!gameTimer.IsGameOver){
+		if (!gameTimer.IsGameOver && !pause.IsPaused){
 			foreach(Attacker attacker in attackers){
 				Spawn(attacker);
 			}
-		}
+		} 
 	}
 
 	private void Spawn(Attacker attacker){

@@ -11,11 +11,13 @@ public class Button : MonoBehaviour {
 	private Button[] buttons;
 	private StarDisplay starDisplay;
 	private Text costLbl;
+	private Pause pause;
 
 	void Start () {
 		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
 		buttons = GameObject.FindObjectsOfType<Button>();
 		sprite = GetComponent<SpriteRenderer>();
+		pause = FindObjectOfType<Pause>();
 		originalColor = sprite.color;
 		SetCost();
 		FadeAll();
@@ -38,7 +40,7 @@ public class Button : MonoBehaviour {
 	}
 
 	private void FadeAll(){
-		foreach (Button button in buttons){
+		for (int i=0; i < buttons.Length; i++){
 			Color fade = sprite.color;
 			fade.a = 0.5f;
 			sprite.color = fade;
@@ -47,10 +49,12 @@ public class Button : MonoBehaviour {
 
 	void OnMouseDown(){
 		//TODO error, if select one then select another, both highlight
-		FadeAll();
-		if (thisButton.GetComponent<Defender>().StarCost <= starDisplay.StarCount){
-			selectedButton = thisButton;
-			sprite.color = originalColor;
+		if (!pause.IsPaused){
+			FadeAll();
+			if (thisButton.GetComponent<Defender>().StarCost <= starDisplay.StarCount){
+				selectedButton = thisButton;
+				sprite.color = originalColor;
+			}
 		} 
 	}
 }

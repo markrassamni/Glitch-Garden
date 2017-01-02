@@ -7,6 +7,7 @@ public class Defender : MonoBehaviour {
 	[SerializeField] private int starCost = 100;
 	private StarDisplay starDisplay;
 	private Animator anim;
+	private Pause pause;
 	
 	public int StarCost {
 		get {
@@ -16,11 +17,16 @@ public class Defender : MonoBehaviour {
 
 	void Start () {
 		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
+		pause = FindObjectOfType<Pause>();
 		anim = GetComponent<Animator>();
 	}
 	
 	void Update () {
-		
+		if (pause.IsPaused){
+			anim.enabled = false;
+		} else {
+			anim.enabled = true;
+		}
 	}
 
 	private void AddStars(int amount){

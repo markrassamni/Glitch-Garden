@@ -7,8 +7,13 @@ public class DefenderSpawner : MonoBehaviour {
 	private GameObject parent;
 	private StarDisplay starDisplay;
 	private int defenderCost;
+	private GameTimer gameTimer;
+	private Pause pause;
+
 	void Start () {
 		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
+		gameTimer = GameObject.FindObjectOfType<GameTimer>();
+		pause = GameObject.FindObjectOfType<Pause>();
 		parent = GameObject.Find("Defenders");
 		if (!parent){
 			parent = new GameObject("Defenders");
@@ -16,12 +21,12 @@ public class DefenderSpawner : MonoBehaviour {
 	}
 	
 	void Update () {
-
+		
 	}
 
 	void OnMouseDown(){
 		targetLocation = CalculateWorldPointOfMouseClick(Input.mousePosition);
-		if (Button.selectedButton){
+		if (Button.selectedButton && !gameTimer.IsGameOver && !pause.IsPaused){
 			defenderCost = Button.selectedButton.GetComponent<Defender>().StarCost;
 			if (starDisplay.UseStars(defenderCost)){
 				GameObject defender = Instantiate(Button.selectedButton, targetLocation, Quaternion.identity) as GameObject;

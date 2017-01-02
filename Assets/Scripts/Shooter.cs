@@ -8,10 +8,12 @@ public class Shooter : MonoBehaviour {
 
 	private Animator anim;
 	private GameObject parent;
+	private Pause pause;
 	
 	// Use this for initialization
 	void Start () {
 		anim = GameObject.FindObjectOfType<Animator>();
+		pause = GameObject.FindObjectOfType<Pause>();
 		parent = GameObject.Find("Projectiles");
 		if (!parent){
 			parent = new GameObject("Projectiles");
@@ -20,7 +22,12 @@ public class Shooter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Attack();
+		if (!pause.IsPaused){
+			anim.enabled = true;
+			Attack();
+		} else {
+			anim.enabled = false;
+		}
 	}
 
 	private void Attack(){

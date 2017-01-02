@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour {
 
+
+	//TODO, change pause music??
+	
 	public AudioClip[] levelMusic;
 
 	private AudioSource audioSource;
@@ -23,6 +26,14 @@ public class MusicManager : MonoBehaviour {
 
 	void OnDisable(){
 		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	public void Pause(){
+		audioSource.Pause();
+	}
+
+	public void UnPause(){
+		audioSource.UnPause();
 	}
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {

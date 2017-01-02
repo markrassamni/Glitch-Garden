@@ -10,6 +10,7 @@ public class Attacker : MonoBehaviour {
 	[SerializeField] [TooltipAttribute("Average number of seconds between appearances of this attacker.")] 
 	private float spawnTime;
 	private Animator anim;
+	private Pause pause;
 
 	private GameObject currentTarget;
 	private LevelManager levelManager;
@@ -24,16 +25,23 @@ public class Attacker : MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animator>();
 		levelManager = GameObject.FindObjectOfType<LevelManager>();
+		pause = FindObjectOfType<Pause>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate(Vector3.left * walkSpeed * Time.deltaTime);
-		if (!currentTarget){
-			anim.SetBool("isAttacking", false);
+		if (!pause.IsPaused){
+			anim.enabled = true;
+			transform.Translate(Vector3.left * walkSpeed * Time.deltaTime);
+			if (!currentTarget){
+				anim.SetBool("isAttacking", false);
+			}
+		} else {
+			anim.enabled = false;
 		}
 	}
 
+	//Call from animator
 	private void SetSpeed(float speed){
 		walkSpeed = speed;
 	}
