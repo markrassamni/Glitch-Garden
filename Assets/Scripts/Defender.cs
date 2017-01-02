@@ -6,18 +6,19 @@ public class Defender : MonoBehaviour {
 
 	[SerializeField] private int starCost = 100;
 	private StarDisplay starDisplay;
-
+	private Animator anim;
+	
 	public int StarCost {
 		get {
 			return starCost;
 		}
 	}
-	// Use this for initialization
+
 	void Start () {
 		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
+		anim = GetComponent<Animator>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
@@ -25,12 +26,11 @@ public class Defender : MonoBehaviour {
 	private void AddStars(int amount){
 		starDisplay.AddStars(amount);
 	}
-
-	// public bool UseStars(int cost){
-	// 	return starDisplay.UseStars(cost);
-	// }
 	
-	void OnTriggerEnter2D(Collider2D other){
-		//Debug.Log(name + " trigger enter");
+	void OnTriggerStay2D(Collider2D other){
+		//Lizard lizard = other.GetComponent<Lizard>();
+		if (gameObject.tag == "Stone" && other.name != "Fox(Clone)"){
+			anim.SetTrigger("attackedTrigger");
+		}
 	}
 }

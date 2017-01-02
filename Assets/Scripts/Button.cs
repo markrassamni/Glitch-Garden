@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Button : MonoBehaviour {
 
@@ -9,13 +10,25 @@ public class Button : MonoBehaviour {
 	private Color originalColor;
 	private Button[] buttons;
 	private StarDisplay starDisplay;
+	private Text costLbl;
 
 	void Start () {
 		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
 		buttons = GameObject.FindObjectsOfType<Button>();
 		sprite = GetComponent<SpriteRenderer>();
 		originalColor = sprite.color;
+		SetCost();
 		FadeAll();
+	}
+
+	private void SetCost(){
+		costLbl = transform.FindChild("Cost").GetComponent<Text>(); 
+		if (costLbl){
+			costLbl.text = thisButton.GetComponent<Defender>().StarCost.ToString();
+		} else {
+			Debug.LogError("Could not find cost to update label on " + name);
+		}
+		
 	}
 	
 	void Update () {
@@ -34,7 +47,7 @@ public class Button : MonoBehaviour {
 
 	void OnMouseDown(){
 		//TODO error, if select one then select another, both highlight
-		selectedButton = null;
+		FadeAll();
 		if (thisButton.GetComponent<Defender>().StarCost <= starDisplay.StarCount){
 			selectedButton = thisButton;
 			sprite.color = originalColor;
